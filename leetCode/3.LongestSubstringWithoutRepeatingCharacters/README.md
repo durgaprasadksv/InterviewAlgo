@@ -16,18 +16,13 @@ public class Solution {
 	*/
 	public int lengthOfLongestSubstring(String s) {
 		int[] arr = new int[256];
-		int start = 1;
 		int max = 0;
-		for(int i=0; i<s.length(); i++) {
+		for(int i=0,start=0 i<s.length(); i++) {
 			char c = s.charAt(i);
-			if (arr[c] >= start) {
-				//found a duplicate char after the start point
-				max = Math.max(max, i-start+1);
-				start = arr[c]+1;
-			}
+			start = Math.max(start, arr[c]);
+			max = Math.max(max, i-start+1);
 			arr[c] = i+1;
 		}
-		max = Math.max(max, s.length()-start+1);
 		return max;
 	}
 	
